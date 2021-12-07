@@ -4,10 +4,6 @@ using System.Linq;
 
 namespace Tacos
 {
-    public class MenuItem
-    {
-
-    }
     class Program
     {
         static void Main(string[] args)

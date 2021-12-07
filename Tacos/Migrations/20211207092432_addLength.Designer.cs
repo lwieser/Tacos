@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tacos;
 
 namespace Tacos.Migrations
 {
     [DbContext(typeof(TacosContext))]
-    partial class TacosContextModelSnapshot : ModelSnapshot
+    [Migration("20211207092432_addLength")]
+    partial class addLength
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
