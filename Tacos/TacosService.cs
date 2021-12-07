@@ -18,6 +18,7 @@ namespace Tacos
         {
             var list = _context.Tacos
                 .Include(x => x.Ingredients)
+                .ThenInclude(x => x.Ingredient)
                 .ToList();
             foreach (var l in list)
             {
@@ -57,6 +58,7 @@ namespace Tacos
         {
             return _context.Tacos
                 .Include(x => x.Ingredients)
+                .ThenInclude(x => x.Ingredient)
                 .Single(tacos => tacos.Id == id);
         }
 
@@ -69,16 +71,16 @@ namespace Tacos
 
         public void AddIngredients()
         {
-            throw new NotImplementedException();
-            // var tacos = Fetch();
-            // Console.WriteLine($"Tacos sélectionné {tacos}");
-            // Console.WriteLine("Nouvel ingrédient : ");
-            // var ing = Console.ReadLine();
-            // tacos.Ingredients.Add(new Ingredient()
-            // {
-            //     Name = ing
-            // });
-            // _context.SaveChanges();
+            var tacos = Fetch();
+            Console.WriteLine($"Tacos sélectionné {tacos}");
+            Console.WriteLine("Nouvel ingrédient : ");
+            var ing = int.Parse(Console.ReadLine());
+            tacos.Ingredients.Add(new Composition()
+            {
+                Ingredient = _context.Ingredient.Find(ing)
+            });
+            _context.Tacos.Update(tacos);
+            _context.SaveChanges();
         }
 
         private Tacos Fetch()

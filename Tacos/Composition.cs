@@ -7,5 +7,10 @@
         public int TacosId { get; set; }
         public int IngredientId { get; set; }
         public float Weight { get; set; }
+
+        public override string ToString()
+        {
+            return Ingredient.Name;
+        }
     }
 }

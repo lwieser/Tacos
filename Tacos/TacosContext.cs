@@ -5,7 +5,8 @@ namespace Tacos
     public class TacosContext:DbContext
     {
         public DbSet<Tacos> Tacos { get; set; }
-        
+        public DbSet<Ingredient> Ingredient { get; set; }
+
         public TacosContext() : base()
         {
 

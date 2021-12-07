@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace Tacos
 {
@@ -13,7 +14,7 @@ namespace Tacos
 
         public override string ToString()
         {
-            return $"{Name} ({String.Join(",", Ingredients ?? new List<Composition>())})";
+            return $"{Name} ({String.Join(",", Ingredients ?? new List<Composition>())}) [{Ingredients?.Sum(x => x.Weight)} g]";
         }
     }
 }
