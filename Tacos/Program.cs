@@ -8,35 +8,31 @@ namespace Tacos
     {
         static void Main(string[] args)
         {
+            var ts = new TacosService();
+            var items = new List<MenuItem>()
+            {
+                new MenuItem("1", "Liste", ts.List),
+                new MenuItem("2", "Ajouter", ts.Add),
+                new MenuItem("3", "Modifier", ts.Update),
+                new MenuItem("4", "Supprimer", ts.Remove),
+            };
             Console.WriteLine("Que souhaitez-vous faire ? ");
-            Console.WriteLine("1/ Liste");
-            Console.WriteLine("2/ Ajouter");
-            Console.WriteLine("3/ Modifier");
-            Console.WriteLine("4/ Supprimer");
-            Console.WriteLine("q/ quitter");
+
+            foreach (var menuItem in items)
+            {
+                Console.WriteLine($"{menuItem.Key}/ {menuItem.Description}");
+            }
 
             string key = null;
-            var ts = new TacosService();
             do
             {
                 key = Console.ReadLine();
-                switch (key)
+                var item = items.FirstOrDefault(x => x.Key == key);
+                if (item != null)
                 {
-                    case "1":
-                        ts.List();
-                        break;
-                    case "2":
-                        ts.Add();
-                        break;
-                    case "3":
-                        ts.Update();
-                        break;
-                    case "4":
-                        ts.Remove();
-                        break;
+                    item.Function();
                 }
             } while (key != "q");
-
         }
 
     }
