@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tacos
 {
@@ -14,11 +16,20 @@ namespace Tacos
 
         public void List()
         {
-            var list = _context.Tacos.ToList();
+            var list = _context.Tacos
+                .Include(x => x.Ingredients)
+                .ToList();
             foreach (var l in list)
             {
-                Console.WriteLine($"{l.Id} : {l.Name}");
+                Console.WriteLine($"{l.Id} : {l}");
             }
+        }
+
+        public void Reset()
+        {
+            var tacos = Fetch();
+            tacos.Ingredients = new List<Ingredient>();
+            _context.SaveChanges();
         }
 
         public void Add()
@@ -35,27 +46,46 @@ namespace Tacos
 
         public void Update()
         {
-            Console.WriteLine("Saisir l'id du tacos");
-            var id = int.Parse(Console.ReadLine());
+            var tacos = Fetch();
             Console.WriteLine("Saisir le nom du tacos");
             var name = Console.ReadLine();
-            var tacos = Get(id);
             tacos.Name = name;
             _context.SaveChanges();
         }
 
         private Tacos Get(int id)
         {
-            return _context.Tacos.Single(tacos => tacos.Id == id);
+            return _context.Tacos
+                .Include(x => x.Ingredients)
+                .Single(tacos => tacos.Id == id);
         }
 
         public void Remove()
         {
-            Console.WriteLine("Saisir l'id du tacos");
-            var id = int.Parse(Console.ReadLine());
-            var tacos = Get(id);
+            var tacos = Fetch();
             _context.Remove(tacos);
             _context.SaveChanges();
+        }
+
+        public void AddIngredients()
+        {
+            var tacos = Fetch();
+            Console.WriteLine($"Tacos sélectionné {tacos}");
+            Console.WriteLine("Nouvel ingrédient : ");
+            var ing = Console.ReadLine();
+            tacos.Ingredients.Add(new Ingredient()
+            {
+                Name = ing
+            });
+            _context.SaveChanges();
+        }
+
+        private Tacos Fetch()
+        {
+            List();
+            Console.WriteLine("Saisir l'id du tacos");
+            var id = int.Parse(Console.ReadLine());
+            return Get(id);
         }
     }
 }

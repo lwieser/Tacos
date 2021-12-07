@@ -13,6 +13,8 @@ namespace Tacos
                 new("2", "Ajouter", ts.Add),
                 new("3", "Modifier", ts.Update),
                 new("4", "Supprimer", ts.Remove),
+                new("5", "Ajouter ingrédients", ts.AddIngredients),
+                new("6", "Reset recette", ts.Reset),
             };
         }
     }
