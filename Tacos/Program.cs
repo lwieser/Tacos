@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Tacos
 {
@@ -29,7 +30,12 @@ namespace Tacos
 
         public static void List()
         {
-            Console.WriteLine("Liste");
+            var context = new TacosContext();
+            var liste = context.Tacos.ToList();
+            foreach (var l in liste)
+            {
+                Console.WriteLine($"{l.Id} : {l.Name}");
+            }
         }
     }
 }
