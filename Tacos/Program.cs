@@ -15,6 +15,8 @@ namespace Tacos
             Console.WriteLine("Que souhaitez-vous faire ? ");
             Console.WriteLine("1/ Liste");
             Console.WriteLine("2/ Ajouter");
+            Console.WriteLine("3/ Modifier");
+            Console.WriteLine("4/ Supprimer");
             Console.WriteLine("q/ quitter");
 
             string key = null;
@@ -29,6 +31,12 @@ namespace Tacos
                         break;
                     case "2":
                         ts.Add();
+                        break;
+                    case "3":
+                        ts.Update();
+                        break;
+                    case "4":
+                        ts.Remove();
                         break;
                 }
             } while (key != "q");

@@ -34,14 +34,29 @@ namespace Tacos
             _context.SaveChanges();
         }
 
-        public static void Update()
+        public void Update()
         {
-
+            Console.WriteLine("Saisir l'id du tacos");
+            var id = int.Parse(Console.ReadLine());
+            Console.WriteLine("Saisir le nom du tacos");
+            var name = Console.ReadLine();
+            var tacos = Get(id);
+            tacos.Name = name;
+            _context.SaveChanges();
         }
 
-        public static void Remove()
+        private Tacos Get(int id)
         {
+            return _context.Tacos.Single(x => x.Id == id);
+        }
 
+        public void Remove()
+        {
+            Console.WriteLine("Saisir l'id du tacos");
+            var id = int.Parse(Console.ReadLine());
+            var tacos = Get(id);
+            _context.Remove(tacos);
+            _context.SaveChanges();
         }
     }
 
