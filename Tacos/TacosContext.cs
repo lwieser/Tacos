@@ -24,10 +24,6 @@ namespace Tacos
             modelBuilder.Entity<Composition>()
                 .HasKey(x => new {x.IngredientId, x.TacosId})
                 ;
-            modelBuilder.Entity<Composition>(opt =>
-            {
-                opt.
-            })
 
         }
     }
