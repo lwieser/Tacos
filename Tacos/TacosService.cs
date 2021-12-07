@@ -28,7 +28,7 @@ namespace Tacos
         public void Reset()
         {
             var tacos = Fetch();
-            tacos.Ingredients = new List<Ingredient>();
+            tacos.Ingredients = new List<Composition>();
             _context.SaveChanges();
         }
 
@@ -69,15 +69,16 @@ namespace Tacos
 
         public void AddIngredients()
         {
-            var tacos = Fetch();
-            Console.WriteLine($"Tacos sélectionné {tacos}");
-            Console.WriteLine("Nouvel ingrédient : ");
-            var ing = Console.ReadLine();
-            tacos.Ingredients.Add(new Ingredient()
-            {
-                Name = ing
-            });
-            _context.SaveChanges();
+            throw new NotImplementedException();
+            // var tacos = Fetch();
+            // Console.WriteLine($"Tacos sélectionné {tacos}");
+            // Console.WriteLine("Nouvel ingrédient : ");
+            // var ing = Console.ReadLine();
+            // tacos.Ingredients.Add(new Ingredient()
+            // {
+            //     Name = ing
+            // });
+            // _context.SaveChanges();
         }
 
         private Tacos Fetch()

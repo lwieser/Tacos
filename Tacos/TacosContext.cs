@@ -17,5 +17,18 @@ namespace Tacos
             optionsBuilder.UseMySql(cs, ServerVersion.AutoDetect(cs));
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Composition>()
+                .HasKey(x => new {x.IngredientId, x.TacosId})
+                ;
+            modelBuilder.Entity<Composition>(opt =>
+            {
+                opt.
+            })
+
+        }
     }
 }
